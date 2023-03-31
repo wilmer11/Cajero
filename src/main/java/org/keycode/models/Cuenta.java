@@ -34,7 +34,7 @@ public class Cuenta {
     public void agregarCliente(Cliente cliente) {
         this.clientes.add(cliente);
     }
-    
+
     public void agregarTransferencia(Cuenta cuenta){
         transferencia.add(cuenta);
     }
