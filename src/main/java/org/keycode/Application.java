@@ -13,10 +13,14 @@ public class Application {
         Cuenta cuenta1 = cliente1.obtenerCuenta(112233);
         Cuenta cuenta2 = cliente1.obtenerCuenta(778899);
         cuenta1.realizarTransferencia(cuenta1,cuenta2,15000);
+        System.out.println(cliente1.obtenerCuenta(778899).getSaldo());
         cuenta1.listarTransferenciasCuenta(112233);
-        cuenta1.realizarTransferencia(cuenta1,cuenta2,5000);
+        cuenta1.realizarTransferencia(cuenta1,cuenta2,2000);
         System.out.println(cliente1.obtenerCuenta(112233).getSaldo());
         cuenta1.listarTransferenciasCuenta(112233);
+
+        cuenta1.retiro(cuenta1,3500);
+        System.out.println(cliente1.obtenerCuenta(112233).getSaldo());
 
     }
 }

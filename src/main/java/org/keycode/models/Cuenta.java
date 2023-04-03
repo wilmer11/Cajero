@@ -44,6 +44,8 @@ public abstract class Cuenta {
                                                         Cuenta cuentaDestino,
                                                         float monto) throws SaldoInsuficiente;
 
+    public abstract void retiro(Cuenta cuenta, float monto);
+
     public void listarTransferenciasCuenta(int cuenta) {
         for (Transferencia transferencia : transferencias) {
             if (transferencia.getCuentaOrigen().getNumCuenta() == cuenta){

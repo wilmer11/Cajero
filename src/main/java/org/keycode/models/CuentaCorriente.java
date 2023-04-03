@@ -21,4 +21,14 @@ public class CuentaCorriente extends Cuenta{
             return transferencia;
         }
     }
+
+    @Override
+    public void retiro(Cuenta cuenta, float monto) {
+        if (cuenta.getSaldo() - monto < -50000){
+            throw new SaldoInsuficiente();
+
+        } else {
+            cuenta.setSaldo(cuenta.getSaldo() - monto);
+        }
+    }
 }

@@ -21,7 +21,18 @@ public class CuentaAhorro extends Cuenta {
             Transferencia transferencia = new Transferencia(cuentaOrigen,cuentaDestino,monto,fecha);
             this.transferencias.add(transferencia);
             return transferencia;
-
         }
     }
+
+    @Override
+    public void retiro(Cuenta cuenta, float monto) {
+        if (cuenta.getSaldo() - monto < 0){
+            throw new SaldoInsuficiente();
+
+        } else {
+            cuenta.setSaldo(cuenta.getSaldo() - monto);
+        }
+    }
+
+
 }
