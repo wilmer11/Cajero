@@ -1,12 +1,13 @@
 package org.keycode.models;
-
-import java.util.Date;
+import java.util.ArrayList;
+import java.time.LocalTime;
+import java.util.List;
 
 public abstract class Cuenta {
     protected int numCuenta;
     protected float saldo;
     protected String tipoCuenta;
-    protected int clave;
+    protected List<Transferencia> transferencias = new ArrayList<>();
 
     public Cuenta(int numCuenta, float saldo, String tipoCuenta) {
         this.numCuenta = numCuenta;
@@ -30,11 +31,6 @@ public abstract class Cuenta {
         this.saldo = saldo;
     }
 
-    public void transferirDinero(int monto, Date fecha, Cuenta cuentaOrigen, Cuenta cuentaDestino){
-        
-
-    }
-
     @Override
     public String toString() {
         return "Cuenta{" +
@@ -44,7 +40,16 @@ public abstract class Cuenta {
                 '}';
     }
 
-    public abstract Transferencia realizarTransferencia(Cuenta cuentaOrigen, Cuenta cuentaDestino);
+    public abstract Transferencia realizarTransferencia(Cuenta cuentaOrigen,
+                                                        Cuenta cuentaDestino,
+                                                        float monto) throws SaldoInsuficiente;
 
+    public void listarTransferenciasCuenta(int cuenta) {
+        for (Transferencia transferencia : transferencias) {
+            if (transferencia.getCuentaOrigen().getNumCuenta() == cuenta){
+                System.out.println(transferencia);
+            }
+        }
+    }
 
 }

@@ -1,4 +1,5 @@
 package org.keycode.models;
+import java.time.LocalDate;
 
 public class CuentaCorriente extends Cuenta{
     public CuentaCorriente(int numCuenta, float saldo, String tipoCuenta) {
@@ -6,7 +7,18 @@ public class CuentaCorriente extends Cuenta{
     }
 
     @Override
-    public Transferencia realizarTransferencia(Cuenta cuentaOrigen, Cuenta cuentaDestino) {
-        return null;
+    public Transferencia realizarTransferencia(Cuenta cuentaOrigen,
+                                               Cuenta cuentaDestino,
+                                               float monto) throws SaldoInsuficiente{
+        if (cuentaOrigen.getSaldo() - monto < -50000){
+            throw new SaldoInsuficiente();
+        } else {
+            cuentaOrigen.setSaldo(cuentaOrigen.getSaldo() - monto);
+            cuentaDestino.setSaldo(cuentaDestino.getSaldo() + monto);
+            LocalDate fecha = LocalDate.now();
+            Transferencia transferencia = new Transferencia(cuentaOrigen,cuentaDestino,monto,fecha);
+            this.transferencias.add(transferencia);
+            return transferencia;
+        }
     }
 }
