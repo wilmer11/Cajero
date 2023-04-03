@@ -23,7 +23,7 @@ public class CuentaCorriente extends Cuenta{
     }
 
     @Override
-    public void retiro(Cuenta cuenta, float monto) {
+    public void retiro(Cuenta cuenta, float monto) throws SaldoInsuficiente{
         if (cuenta.getSaldo() - monto < -50000){
             throw new SaldoInsuficiente();
 

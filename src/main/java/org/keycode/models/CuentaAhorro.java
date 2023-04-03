@@ -25,7 +25,7 @@ public class CuentaAhorro extends Cuenta {
     }
 
     @Override
-    public void retiro(Cuenta cuenta, float monto) {
+    public void retiro(Cuenta cuenta, float monto) throws SaldoInsuficiente{
         if (cuenta.getSaldo() - monto < 0){
             throw new SaldoInsuficiente();
 
