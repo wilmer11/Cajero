@@ -1,22 +1,18 @@
 package org.keycode.models;
-
-import org.keycode.utils.enums.TipoCuenta;
-
 import java.util.ArrayList;
+import java.time.LocalTime;
 import java.util.List;
 
-public class Cuenta {
-    private int numCuenta;
-    private float saldo;
-    private TipoCuenta tipoCuenta;
-    private Transferencia transferencia;
-    private List<Cliente> clientes;
+public abstract class Cuenta {
+    protected int numCuenta;
+    protected float saldo;
+    protected String tipoCuenta;
+    protected List<Transferencia> transferencias = new ArrayList<>();
 
-    public Cuenta(int numCuenta, float saldo, TipoCuenta tipoCuenta) {
+    public Cuenta(int numCuenta, float saldo, String tipoCuenta) {
         this.numCuenta = numCuenta;
         this.saldo = saldo;
         this.tipoCuenta = tipoCuenta;
-        this.clientes = new ArrayList<>();
     }
 
     public int getNumCuenta() {
@@ -27,15 +23,35 @@ public class Cuenta {
         return saldo;
     }
 
-    public TipoCuenta getTipoCuenta() {
+    public String getTipoCuenta() {
         return tipoCuenta;
     }
 
-    public void agregarCliente(Cliente cliente) {
-        this.clientes.add(cliente);
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
     }
 
-    public void agregarTransferencia(Cuenta cuenta){
-        transferencia.add(cuenta);
+    @Override
+    public String toString() {
+        return "Cuenta{" +
+                "numCuenta=" + numCuenta +
+                ", saldo=" + saldo +
+                ", tipoCuenta='" + tipoCuenta + '\'' +
+                '}';
     }
+
+    public abstract Transferencia realizarTransferencia(Cuenta cuentaOrigen,
+                                                        Cuenta cuentaDestino,
+                                                        float monto) throws SaldoInsuficiente;
+
+    public abstract void retiro(Cuenta cuenta, float monto);
+
+    public void listarTransferenciasCuenta(int cuenta) throws SaldoInsuficiente{
+        for (Transferencia transferencia : transferencias) {
+            if (transferencia.getCuentaOrigen().getNumCuenta() == cuenta){
+                System.out.println(transferencia);
+            }
+        }
+    }
+
 }

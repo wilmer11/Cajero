@@ -1,18 +1,33 @@
 package org.keycode.models;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 public class Transferencia {
+    private Cuenta cuentaOrigen;
+    private Cuenta cuentaDestino;
     private float monto;
-    private Date fecha;
-    private List<Cuenta> cuentas;
+    private LocalDate fecha;
 
-    public Transferencia(float monto, Date fecha) {
+    public Transferencia(Cuenta cuentaOrigen, Cuenta cuentaDestino, float monto, LocalDate fecha) {
+        this.cuentaOrigen = cuentaOrigen;
+        this.cuentaDestino = cuentaDestino;
         this.monto = monto;
         this.fecha = fecha;
-        this.cuentas = new ArrayList<>();
+    }
+
+    public Cuenta getCuentaOrigen() {
+        return cuentaOrigen;
+    }
+
+    public void setCuentaOrigen(Cuenta cuentaOrigen) {
+        this.cuentaOrigen = cuentaOrigen;
+    }
+
+    public Cuenta getCuentaDestino() {
+        return cuentaDestino;
+    }
+
+    public void setCuentaDestino(Cuenta cuentaDestino) {
+        this.cuentaDestino = cuentaDestino;
     }
 
     public float getMonto() {
@@ -23,21 +38,21 @@ public class Transferencia {
         this.monto = monto;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
-    public void add(Cuenta cuenta) {
+    @Override
+    public String toString() {
+        return "Transferencia{" +
+                "cuentaOrigen=" + cuentaOrigen +
+                ", cuentaDestino=" + cuentaDestino +
+                ", monto=" + monto +
+                ", fecha=" + fecha +
+                '}';
     }
-    /*public void cuentaOrigen(int numCuenta, float saldo) {
-        Transferencia transferencia = new Transferencia(transferencias.size(), numCuenta, saldo);
-    }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }*/
 }
